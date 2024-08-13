@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormRequestProduto;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -25,15 +26,22 @@ class ProdutosController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(FormRequestProduto $request)
     {
-        return "Olá";
+        if($request->method() == 'POST') {
+            $data = $request->all();
+            Product::create($data);
+
+            return redirect()->route('produtos.index');
+        }
+
+        return view('produtos.new');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }
@@ -65,8 +73,11 @@ class ProdutosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(string $id, Request $request)
+    public function delete(Request $request)
     {
-        //
+        $id = $request->id;
+        $buscarRegistro = Product::find($id);
+        $buscarRegistro->delete();
+        return response()->json(['success' => true]);
     }
 }
