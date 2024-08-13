@@ -7,38 +7,42 @@
     <h1 class="h2">Produtos</h1>
 </div>
 <div>
-    <form action="" method="get">
+    <form action="{{route ('produtos.index')}}" method="get">
         <input type="text" name="pesquisar" placeholder="Digite o nome">
-        <button>Pesquisar</button>
-        <a href="" type="button" class="btn btn-success float-end">
+        <button type="submit">Pesquisar</button>
+        <a href="{{route('produto.add')}}" type="button" class="btn btn-success float-end">
             Incluir Produto
         </a>
     </form>
 </div>
 <div class="table-responsive mt-4">
-    <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th >Nome</th>
-          <th >Valor</th>
-          <th >Ações</th>
-        </tr>
-      </thead>
+    @if($findProdutos->isEmpty())
+      <p>Não existe dados</p>
+    @endif
+    
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th >Nome</th>
+            <th >Valor</th>
+            <th >Ações</th>
+          </tr>
+        </thead>
       
           
       
-      <tbody>
-        @foreach ($findProdutos as $produto)
-        <tr>
-          <td>{{$produto->nome}}</td>
-          <td>{{"R$" . ' '. number_format($produto->valor, 2, ',', '.')}}</td>
-          <td>
-              <a href="" class="btn btn-warning btn-sm">Editar</a>
-              <a href="" class="btn btn-danger btn-sm">Excluir</a>  
-          </td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
+        <tbody>
+          @foreach ($findProdutos as $produto)
+          <tr>
+            <td>{{$produto->nome}}</td>
+            <td>{{"R$" . ' '. number_format($produto->valor, 2, ',', '.')}}</td>
+            <td>
+                <a href="" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{{route('produto.delete')}}" class="btn btn-danger btn-sm">Excluir</a>  
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
 @endsection

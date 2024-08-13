@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
 {
+    protected $produto;
+
+    public function __construct(Product $produto) {
+        $this->produto = $produto;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $findProdutos = Product::all();
+        $pesquisar = $request->pesquisar;
+        $findProdutos = $this->produto->getProdutosPesquisarIndex(search : $pesquisar ?? '');
         return view('produtos.index', compact('findProdutos'));
     }
 
@@ -21,7 +27,7 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        //
+        return "Olá";
     }
 
     /**
@@ -59,7 +65,7 @@ class ProdutosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id, Request $request)
     {
         //
     }
