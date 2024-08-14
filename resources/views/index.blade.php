@@ -148,6 +148,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"></script>
     <script src="{{asset('js/dashboard.js')}}"></script>
     <script src="{{asset('js/color-modes.js')}}"></script>
+
+    {{-- InputMask --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
     {{-- BlocUI loading --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.js"></script>
 </body>
