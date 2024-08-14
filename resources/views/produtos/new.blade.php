@@ -7,7 +7,7 @@
 <form action="{{route('produto.add')}}" method="POST">
     @csrf
 <div class="form-floating mb-3">
-    <input type="text" name="nome" class="form-control @error('nome') is-invalid @enderror" id="Masc_nome" placeholder="Consultoria">
+    <input type="text" name="nome" value="{{ old('nome') }}" class="form-control @error('nome') is-invalid @enderror" id="Masc_nome" placeholder="Consultoria">
     <label for="nome">Nome</label>
     @if ($errors->has('nome'))
         <div class="invalid-feedback">
@@ -16,8 +16,8 @@
     @endif
   </div>
   <div class="form-floating">
-    <input type="number" name="valor"  class="form-control @error('valor') is-invalid @enderror" id="Masc_valor" placeholder="8.40">
-    <label for="nome">Valor</label>
+    <input name="valor" value="{{ old('valor') }}" class="form-control @error('valor') is-invalid @enderror" id="Masc_valor" placeholder="8.40">
+    <label for="valor">Valor</label>
     @if ($errors->has('valor'))
         <div class="invalid-feedback">
             {{$errors->first('valor')}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormRequestProduto;
+use App\Models\Componentes;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,8 @@ class ProdutosController extends Controller
     {
         if($request->method() == 'POST') {
             $data = $request->all();
+            $componentes = new Componentes();
+            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             Product::create($data);
 
             return redirect()->route('produtos.index');
@@ -57,9 +60,24 @@ class ProdutosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(FormRequestProduto $request, int $id)
     {
-        //
+        if($request->method() == 'PUT') {
+            
+            $data = $request->all();
+            $componentes = new Componentes();
+            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
+            $buscarRegistro = Product::find($id);
+
+            $buscarRegistro->update($data);
+
+            return redirect()->route('produtos.index');
+
+        }
+
+        $produto = Product::where('id', '=', $id)->first();
+
+        return view('produtos.edit', compact('produto'));
     }
 
     /**

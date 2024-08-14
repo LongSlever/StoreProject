@@ -20,7 +20,13 @@ Route::get('/', function () {
 
 Route::prefix('produtos')->group(function() {
     Route::get('/', [ProdutosController::class, 'index'])->name('produtos.index');
+    //add
     Route::get('/add', [ProdutosController::class, 'create'])->name('produto.add');
     Route::post('/add', [ProdutosController::class, 'create'])->name('produto.add');
+    // edit
+    Route::get('/edit/{id}', [ProdutosController::class, 'edit'])->name('produto.edit');
+    Route::put('/edit/{id}', [ProdutosController::class, 'edit'])->name('produto.edit');
+    // delete
     Route::delete('/delete', [ProdutosController::class, 'delete'])->name('produto.delete');
+
 });
