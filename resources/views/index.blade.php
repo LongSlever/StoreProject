@@ -13,6 +13,9 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    
+    <!-- Toastr css-->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href=" {{ asset('icones/apple-touch-icon.png') }}" sizes="180x180">
@@ -151,6 +154,10 @@
 
     {{-- InputMask --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+    {!! Toastr::message() !!}
 
     {{-- BlocUI loading --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.js"></script>

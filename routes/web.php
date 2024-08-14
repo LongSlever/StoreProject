@@ -30,3 +30,16 @@ Route::prefix('produtos')->group(function() {
     Route::delete('/delete', [ProdutosController::class, 'delete'])->name('produto.delete');
 
 });
+
+Route::prefix('clientes')->group(function() {
+    Route::get('/', [ClientesController::class, 'index'])->name('clientes.index');
+    //add
+    Route::get('/add', [ClientesController::class, 'create'])->name('cliente.add');
+    Route::post('/add', [ClientesController::class, 'create'])->name('cliente.add');
+    // edit
+    Route::get('/edit/{id}', [ClientesController::class, 'edit'])->name('cliente.edit');
+    Route::put('/edit/{id}', [ClientesController::class, 'edit'])->name('cliente.edit');
+    // delete
+    Route::delete('/delete', [ClientesController::class, 'delete'])->name('cliente.delete');
+
+});
