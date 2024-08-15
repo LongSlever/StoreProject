@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\VendaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +44,15 @@ Route::prefix('clientes')->group(function() {
     // delete
     Route::delete('/delete', [ClientesController::class, 'delete'])->name('cliente.delete');
 
+});
+
+Route::prefix('vendas')->group(function() {
+    Route::get('/', [VendaController::class, 'index'])->name('vendas.index');
+    //add
+    Route::get('/add', [VendaController::class, 'create'])->name('venda.add');
+    Route::post('/add', [VendaController::class, 'create'])->name('venda.add');
+    // edit
+    Route::get('/show/{id}', [VendaController::class, 'show'])->name('venda.show');
+    // delete
+    Route::delete('/delete', [VendaController::class, 'delete'])->name('venda.delete');
 });
