@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FormRequestClientes;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class ClientesController extends Controller
@@ -27,41 +29,37 @@ class ClientesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(FormRequestClientes $request)
     {
-        //
-    }
+        if($request->method() == 'POST') {
+            $data = $request->all();;
+            Cliente::create($data);
+            Toastr::success('Cadastrado com sucesso');
+            return redirect()->route('clientes.index');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cliente $cliente)
-    {
-        //
+        return view('clientes.new');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cliente $cliente)
+    public function edit(Request $request, int $id)
     {
-        //
-    }
+        if($request->method() == 'PUT') {
+            
+            $data = $request->all();
+            $buscarRegistro = Cliente::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cliente $cliente)
-    {
-        //
+            $buscarRegistro->update($data);
+
+            return redirect()->route('clientes.index');
+
+        }
+
+        $cliente = Cliente::where('id', '=', $id)->first();
+
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
