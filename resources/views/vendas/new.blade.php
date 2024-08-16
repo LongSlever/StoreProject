@@ -15,7 +15,7 @@
         @endif
     </div>
     <div class="form-floating mb-3">
-        <select class="form-select" name="produto_id">
+        <select class="form-select" name="product_id">
             <option selected>Selecione o produto</option>
             @foreach ($produtos as $produto)
             <option value="{{$produto->id}}">{{$produto->nome}}</option>

@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VendaController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::prefix('dashboard')->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
 Route::prefix('produtos')->group(function() {
@@ -55,4 +58,24 @@ Route::prefix('vendas')->group(function() {
     Route::get('/show/{id}', [VendaController::class, 'show'])->name('venda.show');
     // delete
     Route::delete('/delete', [VendaController::class, 'delete'])->name('venda.delete');
+
+    //envio email
+    Route::get('/send/{id}', [VendaController::class, 'enviaComprovante'])->name('venda.email');
 });
+
+Route::prefix('usuarios')->group(function() {
+    Route::get('/', [UsuarioController::class, 'index'])->name('usuarios.index');
+    //add
+    Route::get('/add', [UsuarioController::class, 'create'])->name('usuario.add');
+    Route::post('/add', [UsuarioController::class, 'create'])->name('usuario.add');
+    // edit
+    Route::get('/edit/{id}', [UsuarioController::class, 'edit'])->name('usuario.edit');
+    Route::put('/edit/{id}', [UsuarioController::class, 'edit'])->name('usuario.edit');
+    // delete
+    Route::delete('/delete', [UsuarioController::class, 'delete'])->name('usuario.delete');
+
+});
+
+
+
+

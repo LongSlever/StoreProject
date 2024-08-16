@@ -38,12 +38,14 @@
           <tr>
             <td>{{$venda->numero_da_venda}}</td>
             <td>{{$venda->cliente->nome}}</td>
-            <td>{{$venda->produto->nome}}</td>
-            <td>{{$venda->produto->valor}}</td>
+            <td>{{$venda->product->nome}}</td>
+            <td>{{$venda->product->valor}}</td>
             <td>
-                <a href="{{route ('venda.show', $venda->numero_da_venda)}}" class="btn btn-primary btn-sm">Ver</a>
+                <a href="{{route ('venda.show', $venda->id)}}" class="btn btn-primary btn-sm">Ver</a>
+                <a href="{{route ('venda.email',$venda->id )}}" class="btn btn-secondary btn-sm">Enviar E-mail</a>
                 <meta name="csrf-token" content="{{csrf_token() }}"/>
-                <a onclick="deleteRegistroPaginacao('{{route('venda.delete')}}', {{ $produto->id }})" class="btn btn-danger btn-sm">Excluir</a> 
+                <a onclick="deleteRegistroPaginacao('{{route('venda.delete')}}', {{ $venda->id }})" class="btn btn-danger btn-sm">Excluir</a>
+                
             </td>
           </tr>
           @endforeach
